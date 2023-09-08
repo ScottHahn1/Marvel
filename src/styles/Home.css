@@ -1,0 +1,160 @@
+.home {
+    max-width: 100%;
+    background-repeat: no-repeat  !important;
+    background-size: 100% 100% !important;
+    color: white;
+}
+
+.featured-movie {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    animation: fade-in 2s linear 0s 1;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    
+    100% {
+        opacity: 1;
+    }
+}
+
+.featured-movie-info {
+    width: 50%;
+    font-family: "MontserratBold";
+}
+
+.featured-movie-info > * {
+    padding-bottom: 1rem;
+}
+
+.featured-movie h3 {
+    color: var(--red);
+}
+
+.featured-movie img {
+    max-height: 25rem;
+    padding: 1rem 0;
+    transform: skewX(-10deg);
+}
+
+.split-div-container {
+    width: 100%;
+    display: flex;
+    color: white;
+    position: relative;
+    padding-top: 5rem;
+}
+
+.split-div-container p {
+    font-family: "RobotoMedium";
+}
+
+.split-div-container img {
+    position: absolute;
+    left: 60%;
+    width: 20%;
+    min-height: 20rem;
+    padding: 2rem;
+    align-self: center;
+}
+
+.split-div-one {
+    width: 40%;
+    background: linear-gradient(var(--red), black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    justify-content: center;
+}
+
+.split-div-two {
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+    filter: blur(3px);
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    height: 25rem;
+}
+
+.home.comics {
+    justify-content: space-around;
+    gap: 0;
+}
+
+.home.comic-info {
+    width: 15%;
+    min-height: 15rem;
+    font-size: 1.1rem;
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 1em; 
+}
+
+.home.comic-info p {
+    font-family: "RobotoMedium";
+} 
+
+.home.comic-info img {
+    width: 100%;
+    min-height: 80%;
+}
+
+@media screen and (max-width: 500px) {
+    .split-div-one {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+    } 
+
+    .split-div-two {
+        display: none;
+    }
+
+    .featured-movie {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .featured-movie img {
+        max-height: 20rem;
+        transform: none;
+    }
+
+    .featured-movie-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .home.comic-info {
+        width: 90%;
+        margin: 1rem 0;
+        padding: 0;
+        border: 3px solid black;
+        background: linear-gradient(var(--red), black);
+        color: white;
+    }
+
+    .home.comic-info img {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .split-div-one, .split-div-two {
+        width: 50%;
+    }
+
+    .split-div-container img {
+        left: 70%;
+        padding: 4rem;
+    }
+}

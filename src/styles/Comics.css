@@ -1,0 +1,65 @@
+.comics {
+  display: flex;
+  overflow: hidden;
+  gap: 2rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.comic-info {
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  min-height: 20rem;
+  border: 1px solid black;
+  margin: 1rem .2rem;
+  font-size: 1.5rem;
+  background-color: black;
+  color: white;
+  text-overflow: ellipsis;
+  margin: 0 auto;
+  width: 20%;
+}
+
+.comic-info img {
+  width: 100%;
+  min-height: 18rem;
+  max-height: 18rem;
+}
+
+.comic-info :not(:hover) {
+  text-overflow: ellipsis;
+}
+
+.comic-info:hover {
+  animation: scale 1s ease-in-out 1 forwards;
+
+}
+
+@keyframes change-colour {
+  100% {
+    background-color: rgb(34, 32, 32);
+    color: white;
+  }
+}
+
+.comic-info p:hover {
+  animation: scroll-text 5s linear 0s infinite alternate;
+  overflow: visible;
+}
+
+@keyframes scroll-text {
+    0% {
+      transform: translateX(0%);
+    }
+    90% {
+      transform: translateX(-100%);
+    }
+    95% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
