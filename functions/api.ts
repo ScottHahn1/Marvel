@@ -39,7 +39,7 @@ router.get('/characters', (req, res) => {
   .catch(err => console.error(err));
 });
 
-app.use('/api/', router);
+app.use('/.netlify/functions/api', router);
 
 export const handler = serverless(app);
 
