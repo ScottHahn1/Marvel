@@ -33,6 +33,7 @@ router.get('/characters', (req, res) => {
   })
   .then(response => {
     res.json(response.data);
+    console.log(response.data);
   })
   .catch(err => console.error(err));
 });
