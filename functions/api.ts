@@ -18,7 +18,6 @@ export const hash = getHash(timestamp, privateKey, publicKey);
 
 const app = express();
 app.use(cors());
-// const port = process.env.PORT;
 const router = Router();
 
 router.get('/characters', (req, res) => {
@@ -42,7 +41,3 @@ router.get('/characters', (req, res) => {
 app.use('/.netlify/functions/api', router);
 
 export const handler = serverless(app);
-
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });
