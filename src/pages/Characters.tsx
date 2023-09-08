@@ -38,7 +38,7 @@ const Characters = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string
   interface IParams { offset: number }
   const params = { offset: queryOffset }
 
-  const url = 'http://localhost:8000/characters'
+  const url = './netlify/functions/characters'
   // const { data: marvelApiData, loading } = useFetch<CharacterData[], CharacterParams>(url, [], characterParams, undefined, queryOffset);
   const { data: marvelApiData, loading } = useFetch<CharacterData[], IParams>(url, [], params, undefined, queryOffset);
 
