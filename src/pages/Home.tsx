@@ -11,7 +11,7 @@ const Home = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | num
         <main className='main'>
             <FeaturedMovie setLoading={setFeaturedMovieLoading} />
             {/* { !featuredMovieLoading && <News /> } */}
-            { !featuredMovieLoading && <NewComics setClicked={setClicked} /> } 
+            {/* { !featuredMovieLoading && <NewComics setClicked={setClicked} /> }  */}
         </main>
     )
 }
