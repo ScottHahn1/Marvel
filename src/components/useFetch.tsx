@@ -23,7 +23,7 @@ const useFetch = <S, T>(url: string, initialState: S, params: T, headers?: Axios
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
                 setError(true)
             });
         }
