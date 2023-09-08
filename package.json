@@ -28,7 +28,7 @@
   "scripts": {
     "start:backend": "nodemon server.ts",
     "start:frontend": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "BROWSER='chrome' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
