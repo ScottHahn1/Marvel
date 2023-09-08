@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import dotenv from 'dotenv';
 import axios from 'axios';
 import cors from 'cors';
+import serverless from 'serverless-http';
 
 dotenv.config();
 
@@ -39,6 +40,8 @@ router.get('/characters', (req, res) => {
 });
 
 app.use('/api/', router);
+
+export const handler = serverless(app);
 
 // app.listen(port, () => {
 //   console.log(`Server is running on port ${port}`);

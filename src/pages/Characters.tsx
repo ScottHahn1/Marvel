@@ -14,7 +14,7 @@ export const timestamp = Date.now().toString();
 export const publicKey = process.env.REACT_APP_PUBLIC_API_KEY;
 export const privateKey = process.env.REACT_APP_PRIVATE_API_KEY;
 export const hash = getHash(timestamp, privateKey, publicKey);
-                      console.log(publicKey)                                                                                                              
+                                                                                                        
 type CharacterDetails = {
   name: string
   id: number
