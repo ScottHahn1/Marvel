@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../styles/Characters.css";
 import useFetch from "../components/useFetch";
 import { CharacterData } from "../interfaces/ICharacters";
-import axios from "axios";
 
 const getHash = (ts: string, privateKey: string | undefined, publicKey: string | undefined) => {
   let md5 = require("md5");
@@ -28,42 +27,12 @@ type CharacterDetails = {
 const Characters = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | number>> }) => {
   const [characters, setCharacters] = useState<CharacterDetails[]>([]);
   const [queryOffset, setQueryOffset] = useState(0);
-  // const characterParams: CharacterParams = {
-  //   apikey: publicKey,
-  //   ts: timestamp,
-  //   hash: hash,
-  //   offset: queryOffset,
-  // }
 
   interface IParams { offset: number }
   const params = { offset: queryOffset }
 
   const url = '/.netlify/functions/api/characters'
-  // const { data: marvelApiData, loading } = useFetch<CharacterData[], CharacterParams>(url, [], characterParams, undefined, queryOffset);
   const { data: marvelApiData, loading } = useFetch<CharacterData[], IParams>(url, [], params, undefined, queryOffset);
-
-  // const [data, setData] = useState<CharacterData[]>([]);
-  // const [hasMore, setHasMore] = useState(false);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState('');
-
-  // useEffect(() => {
-  //     if (url) {
-  //         setLoading(true);
-  //         setError('');
-  //         axios.get(url, {
-  //           params: {
-  //             offset: queryOffset
-  //           }
-  //         })
-  //         .then(res => {
-  //           setCharacters((prev: any) => (prev ? [...prev, res.data] : res.data));
-  //           setHasMore(res.data ? true : false);
-  //           setLoading(false);
-  //         })
-  //         .catch((err) => setError(err));
-  //     }
-  // }, [url, queryOffset])
 
   useEffect(() => {
     if (marvelApiData.length > 0) {
