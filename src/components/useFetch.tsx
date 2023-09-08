@@ -18,14 +18,13 @@ const useFetch = <S, T>(url: string, initialState: S, params: T, headers?: Axios
                 params: params
             })
             .then(res => {
-                console.log(res)
                 setData((prev: any) => (prev ? [...prev, res.data] : res.data));
                 setHasMore(res.data ? true : false);
                 setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
-                setError(true);
+                setError(true)
             });
         }
     }, [url, pageNumber])

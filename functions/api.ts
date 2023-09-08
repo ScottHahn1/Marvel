@@ -24,7 +24,7 @@ const router = Router();
 router.get('/characters', (req, res) => {
   const offset = req.query.offset;
 
-  axios.get('http://gateway.marvel.com/v1/public/characters?limit=100/', {
+  axios.get('https://gateway.marvel.com/v1/public/characters?limit=100', {
     params: {
       apikey: publicKey,
       ts: timestamp,
