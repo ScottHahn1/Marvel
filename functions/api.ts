@@ -33,7 +33,23 @@ router.get('/characters', (req, res) => {
   })
   .then(response => {
     res.json(response.data);
-    console.log(response.data);
+  })
+  .catch(err => console.error(err));
+});
+
+router.get('/character-info', (req, res) => {
+  const id = req.query.characterId;
+
+  axios.get('https://gateway.marvel.com/v1/public/characters?limit=100', {
+    params: {
+      apikey: publicKey,
+      ts: timestamp,
+      hash: hash,
+      characterId: id,
+    }
+  })
+  .then(response => {
+    res.json(response.data);
   })
   .catch(err => console.error(err));
 });
