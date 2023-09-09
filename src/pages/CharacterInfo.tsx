@@ -4,12 +4,12 @@ import CharacterComics from "../components/CharacterComics";
 import { CharacterData } from "../interfaces/ICharacters";
 import useFetch from "../components/useFetch";
 
-interface IParams { id: string | number };
+interface IParams { characterId: string | number };
 
 const CharacterInfo = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
   const [characters, setCharacters] = useState<CharacterData[]>([]);
 
-  const params = { id: clicked };
+  const params = { characterId: clicked };
   const url = '/.netlify/functions/api/character-info';
   const { data: marvelApiData } = useFetch<CharacterData[], IParams>(url, [], params, undefined);
 

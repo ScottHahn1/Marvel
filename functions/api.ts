@@ -39,13 +39,12 @@ router.get('/characters', (req, res) => {
 
 router.get('/character-info', (req, res) => {
   const id = req.query.characterId;
-
-  axios.get('https://gateway.marvel.com/v1/public/characters?limit=100', {
+  console.log(req.query)
+  axios.get(`https://gateway.marvel.com/v1/public/characters/${id}`, {
     params: {
       apikey: publicKey,
       ts: timestamp,
       hash: hash,
-      characterId: id,
     }
   })
   .then(response => {
