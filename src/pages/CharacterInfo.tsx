@@ -1,20 +1,17 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import "../styles/CharacterInfo.css";
 import CharacterComics from "../components/CharacterComics";
-import { CharacterParams, CharacterData } from "../interfaces/ICharacters";
+import { CharacterData } from "../interfaces/ICharacters";
 import useFetch from "../components/useFetch";
-import { timestamp, publicKey, hash } from "./Characters";
 
-const characterParams: CharacterParams = {
-  apikey: publicKey,
-  ts: timestamp,
-  hash: hash,
-}
+interface IParams { id: string | number };
 
 const CharacterInfo = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
   const [characters, setCharacters] = useState<CharacterData[]>([]);
-  const url = `http://gateway.marvel.com/v1/public/characters/${clicked}`;
-  const { data: marvelApiData } = useFetch<CharacterData[], CharacterParams>(url, [], characterParams, undefined);
+
+  const params = { id: clicked };
+  const url = '/.netlify/functions/api/character-info';
+  const { data: marvelApiData } = useFetch<CharacterData[], IParams>(url, [], params, undefined);
 
   useEffect(() => {
     marvelApiData.length > 0 && setCharacters(marvelApiData);
