@@ -2,7 +2,6 @@ import { useEffect, useCallback, useState, useRef, SetStateAction, Dispatch } fr
 import { MovieData } from "../interfaces/IMovies";
 import useFetch from "../components/useFetch";
 import { Link } from "react-router-dom";
-import { tmdbHeaders } from "../interfaces/IMovies";
 
 type MoviesProps = {
     id: number
@@ -15,24 +14,15 @@ type MoviesProps = {
     title: string;
 }[]
 
-interface ParamsProps {
-    include_adult: boolean
-    language: string
-    with_companies: string
-    sort_by: string
-}
+interface IParams { page: number }
 
-const params: ParamsProps = {
-    include_adult: false,
-    language: 'en-US',
-    with_companies: '420|19551|38679|2301|13252',
-    sort_by: 'popularity.desc'
-}
-
-const Movies = ({ setClickedMovie }: { setClickedMovie: Dispatch<SetStateAction<string | number>> }) => {
+const Movies = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
     const [movies, setMovies] = useState<MoviesProps[]>([]);
     const [page, setPage] = useState(1);
-    const { data: movieData, hasMore, loading } = useFetch<MovieData[], ParamsProps>(`https://api.themoviedb.org/3/discover/movie?&page=${page}`, [], params, tmdbHeaders, page);
+
+    const params = { page: page };
+    const url = '/.netlify/functions/api/movies';
+    const { data: movieData, hasMore, loading } = useFetch<MovieData[], IParams>(url, [], params, undefined, page);
     const observer = useRef<IntersectionObserver>();
 
     useEffect(() => {
@@ -69,9 +59,9 @@ const Movies = ({ setClickedMovie }: { setClickedMovie: Dispatch<SetStateAction<
                                 return (
                                     <div key={movie.id} className="character-info" ref={lastMovieElementRef}>
                                         <p>{movie.title}</p>
-                                        <Link to='/movie-info'>
+                                        <Link to={`/movies/movie-info/${clicked}`}>
                                             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="character-img"
-                                                onClick={() => setClickedMovie(movie.id)}
+                                                onClick={() => setClicked(movie.id)}
                                             />
                                         </Link>
                                     </div>
@@ -81,9 +71,9 @@ const Movies = ({ setClickedMovie }: { setClickedMovie: Dispatch<SetStateAction<
                                 return (
                                     <div key={movie.id} className="character-info">
                                         <p>{movie.title}</p>
-                                        <Link to="/movie-info">
+                                        <Link to={`/movies/movie-info/${clicked}`}>
                                             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} className="character-img" 
-                                                onClick={() => setClickedMovie(movie.id)}
+                                                onClick={() => setClicked(movie.id)}
                                             />
                                         </Link>
                                     </div>
