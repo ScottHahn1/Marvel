@@ -10,7 +10,7 @@ const CharacterInfo = ({ clicked, setClicked }: { clicked: string | number, setC
   const [characters, setCharacters] = useState<CharacterData[]>([]);
 
   const params = { characterId: clicked };
-  const url = '/.netlify/functions/api/character-info';
+  const url = `/.netlify/functions/api/characters/character-info/${clicked}`
   const { data: marvelApiData } = useFetch<CharacterData[], IParams>(url, [], params, undefined);
 
   useEffect(() => {
