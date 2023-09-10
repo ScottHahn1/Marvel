@@ -53,4 +53,4 @@ router.get('/character-info/:id/comics', (req, res) => {
     .catch(err => console.error(err));
 });
 
-export default router;
+export { router };
