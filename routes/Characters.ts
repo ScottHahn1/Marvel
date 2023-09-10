@@ -37,7 +37,7 @@ router.get('/character-info/:id', (req, res) => {
     .catch(err => console.error(err));
 });
 
-router.get('/character-info/:id', (req, res) => {
+router.get('/character-info/:id/comics', (req, res) => {
     const id = req.query.characterId;
 
     axios.get(`http://gateway.marvel.com/v1/public/characters/${id}/comics?limit=100`, {
