@@ -21,7 +21,6 @@ const app = express();
 app.use(cors());
 
 const charactersRouter = router;
-// app.use('/characters', charactersRouter);
-app.use('/.netlify/functions/api/characters', router);
+app.use('/.netlify/functions/api/characters', charactersRouter);
 
 export const handler = serverless(app);
