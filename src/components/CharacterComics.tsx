@@ -1,18 +1,14 @@
 import { SetStateAction, Dispatch } from "react";
 import useFetch from "./useFetch";
 import { Link } from "react-router-dom";
-import { ComicsData, ComicParams } from "../interfaces/IComics";
-import { publicKey, timestamp, hash } from "../pages/Characters";
+import { ComicsData } from "../interfaces/IComics";
 
-const comicParams: ComicParams = {
-  apikey: publicKey,
-  ts: timestamp,
-  hash: hash,
-}
+interface IParams { characterId: string | number };
 
 const CharacterComics = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
-  const url = `http://gateway.marvel.com/v1/public/characters/${clicked}/comics?limit=100`;
-  const { data: marvelApiData } = useFetch<ComicsData[], ComicParams>(url, [], comicParams, undefined);
+  const params = { characterId: clicked };
+  const url = `/.netlify/functions/api/characters/character-info/${clicked}`;
+  const { data: marvelApiData } = useFetch<ComicsData[], IParams>(url, [], params, undefined);
 
   return (
     <div className='character-comics-container'>
