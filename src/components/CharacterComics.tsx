@@ -7,7 +7,7 @@ interface IParams { characterId: string | number };
 
 const CharacterComics = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
   const params = { characterId: clicked };
-  const url = `/.netlify/functions/api/characters/character-info/${clicked}`;
+  const url = `/.netlify/functions/api/characters/character-info/${clicked}/comics`;
   const { data: marvelApiData } = useFetch<ComicsData[], IParams>(url, [], params, undefined);
 
   return (
