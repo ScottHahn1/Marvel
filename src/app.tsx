@@ -62,8 +62,8 @@ function App() {
         </header>
         <Routes>
           <Route path="/" element={ <Home setClicked={setClicked} /> } />
-          <Route path="/characters" element={ <Characters setClicked={setClicked} /> } /> 
-          <Route path="/character-info" element={ <CharacterInfo clicked={clicked} setClicked={setClicked} /> } /> 
+          <Route path="/characters" element={ <Characters clicked={clicked} setClicked={setClicked} /> } /> 
+          <Route path="/characters/character-info/:id" element={ <CharacterInfo clicked={clicked} setClicked={setClicked} /> } /> 
           <Route path="/comics" element={ <Comics setClicked={setClicked} /> } />
           <Route path="/comic-info" element={ <ComicInfo clicked={clicked} setClicked={setClicked} /> } />
           <Route path="/movies" element={ <Movies setClickedMovie={setClicked} /> } />
