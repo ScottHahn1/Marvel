@@ -24,14 +24,14 @@ type CharacterDetails = {
   }
 }[]
 
-const Characters = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | number>> }) => {
+const Characters = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
   const [characters, setCharacters] = useState<CharacterDetails[]>([]);
   const [queryOffset, setQueryOffset] = useState(0);
 
   interface IParams { offset: number }
   const params = { offset: queryOffset }
 
-  const url = '/.netlify/functions/api/characters'
+  const url = '/.netlify/functions/api/characters/'
   const { data: marvelApiData, loading } = useFetch<CharacterData[], IParams>(url, [], params, undefined, queryOffset);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Characters = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string
               .map(character => 
                 <div key={character.id} className="character-info">
                   <p>{character.name}</p>
-                  <Link to="/character-info">
+                  <Link to={`/characters/character-info/${clicked}`}>
                     <img
                       style={{ cursor: "pointer" }}
                       src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
