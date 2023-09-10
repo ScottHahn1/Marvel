@@ -66,10 +66,10 @@ function App() {
           <Route path="/characters/character-info/:id" element={ <CharacterInfo clicked={clicked} setClicked={setClicked} /> } /> 
           <Route path="/comics" element={ <Comics clicked={clicked} setClicked={setClicked} /> } />
           <Route path="comics/comic-info/:id" element={ <ComicInfo clicked={clicked} setClicked={setClicked} /> } />
-          <Route path="/movies" element={ <Movies setClickedMovie={setClicked} /> } />
-          <Route path="/movie-info" element={ <MovieInfo clicked={clicked} /> } />
+          <Route path="/movies" element={ <Movies clicked={clicked} setClicked={setClicked} /> } />
+          <Route path="/movies/movie-info/:id" element={ <MovieInfo clicked={clicked} /> } />
           <Route path="/series" element={ <Series setClicked={setClicked} /> } />
-          <Route path="/series-info" element={ <SeriesInfo clicked={clicked} /> } />
+          <Route path="/series/series-info/:id" element={ <SeriesInfo clicked={clicked} /> } />
         </Routes>
         <Footer /> 
     </Router>
