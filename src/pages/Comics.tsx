@@ -2,21 +2,25 @@ import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../components/useFetch";
 import "../styles/Comics.css";
-import { ComicParams, ComicsData, ComicDetails } from "../interfaces/IComics";
-import { timestamp, publicKey, hash } from "./Characters";
+import { ComicsData, ComicDetails } from "../interfaces/IComics";
 
-const Comics = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | number>> }) => {
-  const url = `http://gateway.marvel.com/v1/public/comics?limit=100`;
+interface IParams { 
+  offset: number, 
+  orderBy: string 
+}
+
+const Comics = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
   const [comics, setComics] = useState<ComicDetails[]>([]);
   const [queryOffset, setQueryOffset] = useState(0);
-  const comicParams: ComicParams = {
-    apikey: publicKey,
-    ts: timestamp,
-    hash: hash,
+
+  const params = {
     offset: queryOffset,
     orderBy: 'title'
   }
-  const { data: marvelApiData, loading } = useFetch<ComicsData[], ComicParams>(url, [], comicParams, undefined, queryOffset);
+
+  const url = '/.netlify/functions/api/comics';
+  const { data: marvelApiData, loading } = useFetch<ComicsData[], IParams>(url, [], params, undefined, queryOffset);
+
   useEffect(() => {
     if (marvelApiData.length > 0) {
       setComics(marvelApiData.map(group => group.data.results.filter(comic => comic.description)))
@@ -32,7 +36,7 @@ const Comics = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | n
             comicGroup.map(comic => 
               <div key={comic.id} className="character-info">
                 <p>{comic.title}</p>
-                <Link to="/comic-info">
+                <Link to={`/comics/comic-info/${clicked}`}>
                   <img
                     style={{ cursor: "pointer" }}
                     src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}

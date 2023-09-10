@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import axios from 'axios';
 import cors from 'cors';
 import serverless from 'serverless-http';
-import router from '../routes/Characters';
+import { router as charactersRouter } from '../routes/Characters';
+import { router as comicsRouter } from '../routes/Comics';
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ export const hash = getHash(timestamp, privateKey, publicKey);
 const app = express();
 app.use(cors());
 
-const charactersRouter = router;
 app.use('/.netlify/functions/api/characters', charactersRouter);
+app.use('/.netlify/functions/api/comics', comicsRouter);
 
 export const handler = serverless(app);

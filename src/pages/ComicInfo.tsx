@@ -1,18 +1,16 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import useFetch from "../components/useFetch";
 import CharacterComics from "../components/CharacterComics";
-import { ComicParams, ComicsData } from "../interfaces/IComics";
-import { hash, publicKey, timestamp } from "./Characters";
+import { ComicsData } from "../interfaces/IComics";
+
+interface IParams { comicId: string | number };
 
 const ComicInfo = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
-  const url = `http://gateway.marvel.com/v1/public/comics/${clicked}?limit=100`;
   const [comicData, setComicData] = useState<ComicsData[]>([]);
-  const comicParams: ComicParams = {
-    apikey: publicKey,
-    ts: timestamp,
-    hash: hash,
-  }
-  const { data: marvelApiData } = useFetch<ComicsData[], ComicParams>(url, [], comicParams, undefined);
+
+  const params = { comicId: clicked };
+  const url = `/.netlify/functions/api/comics/comic-info/${clicked}`
+  const { data: marvelApiData } = useFetch<ComicsData[], IParams>(url, [], params, undefined);
   
   useEffect(() => {
     marvelApiData.length > 0 && setComicData(marvelApiData);
