@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './app';
 import '../src/fonts/Montserrat-Bold.ttf';
 import '../src/fonts/Roboto-Medium.ttf';
 
