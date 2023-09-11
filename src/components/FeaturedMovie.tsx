@@ -1,14 +1,14 @@
 import {  Dispatch, SetStateAction, useEffect, useState } from "react";
 import useFetch from "../components/useFetch";
-import { tmdbHeaders, Movie, MovieData, ITmdbParams ,tmdbParams } from "../interfaces/IMovies";
+import { Movie, MovieData } from "../interfaces/IMovies";
 
 const date = new Date();
 const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toISOString().slice(0, 10);
 
 const FeaturedMovie = ({ setLoading }: { setLoading: Dispatch<SetStateAction<boolean>> }) => {
-    const url = "https://api.themoviedb.org/3/discover/movie?&page=1";
+    const url = "/.netlify/functions/api/featured-movie";
     const [movie, setMovie] = useState<Movie>({} as Movie);
-    const { data: movieData, loading: movieLoading } = useFetch<MovieData[], ITmdbParams>(url, [], tmdbParams, tmdbHeaders);
+    const { data: movieData, loading: movieLoading } = useFetch<MovieData[], null>(url, [], null, undefined);
     const backgroundImgColor = "linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))";
     
     useEffect(() => {
