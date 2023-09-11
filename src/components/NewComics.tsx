@@ -1,27 +1,16 @@
 import {  Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../components/useFetch";
-import { ComicsData, ComicParams, ComicDetails } from "../interfaces/IComics";
-import { hash, publicKey, timestamp } from "../pages/Characters";
+import { ComicsData, ComicDetails } from "../interfaces/IComics";
 
-const date = new Date();
-const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toISOString().slice(0, 10);
-const twoMonthsFromNow = new Date(date.getFullYear(), date.getMonth() + 2, date.getDate()).toISOString().slice(0, 10);
-
-const comicParams: ComicParams = {
-    apikey: publicKey,
-    ts: timestamp,
-    hash: hash,
-}
-
-const NewComics = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | number>> }) => {
-    const url = `http://gateway.marvel.com/v1/public/comics?&limit=100&orderBy=onsaleDate&dateRange=${today},${twoMonthsFromNow}`
+const NewComics = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
+    const url = '/.netlify/functions/api/new-comics';
     const [comics, setComics] = useState<ComicDetails[] | null>(null);
-    const { data: comicsData, loading: comicsLoading } = useFetch<ComicsData[], ComicParams>(url, [], comicParams, undefined);
+    const { data: comicsData, loading: comicsLoading } = useFetch<ComicsData[], null>(url, [], null, undefined);
     const backgroundImgColor = 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))'
 
     useEffect(() => {
-      comicsData.length && setComics(comicsData.map(group => group.data.results.filter(comic => !comic.thumbnail.path.match('image_not_available'))))
+      comicsData.length && setComics(comicsData.map(group => group.data.results.filter(comic => !comic.thumbnail.path.match('image_not_available'))));
     }, [comicsData])
     
     return (
@@ -44,7 +33,7 @@ const NewComics = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string 
                         return (
                             <div key={comic.id} className="home comic-info">
                             <p>{comic.title}</p>
-                            <Link to="/comic-info">
+                            <Link to={`/comics/comic-info/${clicked}`}>
                                 <img
                                     style={{ cursor: "pointer" }}
                                     src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}

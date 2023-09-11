@@ -4,14 +4,14 @@ import FeaturedMovie from "../components/FeaturedMovie";
 import NewComics from "../components/NewComics";
 import { Dispatch, SetStateAction, useState } from 'react';
 
-const Home = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | number>> }) => {
+const Home = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
     const [featuredMovieLoading, setFeaturedMovieLoading] = useState<boolean>(true);
 
     return (
         <main className='main'>
             <FeaturedMovie setLoading={setFeaturedMovieLoading} />
             {/* { !featuredMovieLoading && <News /> } */}
-            {/* { !featuredMovieLoading && <NewComics setClicked={setClicked} /> }  */}
+            { !featuredMovieLoading && <NewComics clicked={clicked} setClicked={setClicked} /> } 
         </main>
     )
 }
