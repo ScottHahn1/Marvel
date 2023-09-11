@@ -29,7 +29,7 @@ const params: ParamsProps = {
     sort_by: 'popularity.desc'
 }
 
-const Movies = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | number>> }) => {
+const Movies = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
     const [series, setSeries] = useState<Series[]>([]);
     const [page, setPage] = useState(1);
     const { data: seriesData, hasMore, loading } = useFetch<MovieData[], ParamsProps>(`https://api.themoviedb.org/3/discover/tv?&page=${page}`, [], params, tmdbHeaders, page);
@@ -69,7 +69,7 @@ const Movies = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | n
                                 return (
                                     <div key={show.id} className="character-info" ref={lastMovieElementRef}>
                                         <p>{show.name}</p>
-                                        <Link to="/series-info">
+                                        <Link to={`/series/series-info/${clicked}`}>
                                             <img src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} alt={show.name} className="character-img"
                                                 onClick={() => setClicked(show.id)}
                                         />
@@ -81,7 +81,7 @@ const Movies = ({ setClicked }: { setClicked: Dispatch<SetStateAction<string | n
                                 return (
                                     <div key={show.id} className="character-info">
                                         <p>{show.name}</p>
-                                        <Link to="/series-info">
+                                        <Link to={`/series/series-info/${clicked}`}>
                                             <img src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`} alt={show.name} className="character-img" 
                                                 onClick={() => setClicked(show.id)}
                                             />

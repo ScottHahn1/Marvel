@@ -68,7 +68,7 @@ function App() {
           <Route path="comics/comic-info/:id" element={ <ComicInfo clicked={clicked} setClicked={setClicked} /> } />
           <Route path="/movies" element={ <Movies clicked={clicked} setClicked={setClicked} /> } />
           <Route path="/movies/movie-info/:id" element={ <MovieInfo clicked={clicked} /> } />
-          <Route path="/series" element={ <Series setClicked={setClicked} /> } />
+          <Route path="/series" element={ <Series clicked={clicked} setClicked={setClicked} /> } />
           <Route path="/series/series-info/:id" element={ <SeriesInfo clicked={clicked} /> } />
         </Routes>
         <Footer /> 
