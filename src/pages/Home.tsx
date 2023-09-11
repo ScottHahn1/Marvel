@@ -10,7 +10,7 @@ const Home = ({ clicked, setClicked }: { clicked: string | number, setClicked: D
     return (
         <main className='main'>
             <FeaturedMovie setLoading={setFeaturedMovieLoading} />
-            {/* { !featuredMovieLoading && <News /> } */}
+            { !featuredMovieLoading && <News /> }
             { !featuredMovieLoading && <NewComics clicked={clicked} setClicked={setClicked} /> } 
         </main>
     )
