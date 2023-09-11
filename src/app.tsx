@@ -61,7 +61,7 @@ function App() {
           <Navbar />
         </header>
         <Routes>
-          <Route path="/" element={ <Home setClicked={setClicked} /> } />
+          <Route path="/" element={ <Home clicked={clicked} setClicked={setClicked} /> } />
           <Route path="/characters" element={ <Characters clicked={clicked} setClicked={setClicked} /> } /> 
           <Route path="/characters/character-info/:id" element={ <CharacterInfo clicked={clicked} setClicked={setClicked} /> } /> 
           <Route path="/comics" element={ <Comics clicked={clicked} setClicked={setClicked} /> } />
