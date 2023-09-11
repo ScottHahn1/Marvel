@@ -3,16 +3,6 @@ import { Link } from "react-router-dom";
 import "../styles/Characters.css";
 import useFetch from "../components/useFetch";
 import { CharacterData } from "../interfaces/ICharacters";
-
-const getHash = (ts: string, privateKey: string | undefined, publicKey: string | undefined) => {
-  let md5 = require("md5");
-  return md5(ts + privateKey + publicKey).toString();
-};
-
-export const timestamp = Date.now().toString();
-export const publicKey = process.env.REACT_APP_PUBLIC_API_KEY;
-export const privateKey = process.env.REACT_APP_PRIVATE_API_KEY;
-export const hash = getHash(timestamp, privateKey, publicKey);
                                                                                                         
 type CharacterDetails = {
   name: string
