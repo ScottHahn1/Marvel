@@ -25,6 +25,7 @@ router.get('/new-comics', (req, res) => {
 
 router.get('/news', (req, res) => {
     const page = req.query.page;
+    const pageSize = req.query.pageSize;
 
     axios.get(`https://newsapi.org/v2/everything?q=mcu`, {
         params: {
@@ -33,7 +34,7 @@ router.get('/news', (req, res) => {
             from: lastWeek,
             to: today,
             language: "en",
-            pageSize: 2,
+            pageSize: pageSize,
             page: page
         }
     })

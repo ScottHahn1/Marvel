@@ -3,13 +3,13 @@ import useFetch from "../components/useFetch";
 import { NewsData, INews } from "../interfaces/INews";
 import '../styles/News.css';
 
-interface IParams { page: number }
+interface IParams { pageSize: number, page: number }
 
 const News = () => {
     const [news, setNews] = useState<NewsData[]>([]);
     const [page, setPage] = useState(1);
 
-    const params = { page: page };
+    const params = { pageSize: 5, page: page };
     const url = '/.netlify/functions/api/news';
     const { data: newsData, hasMore } = useFetch<INews[], IParams>(url, [], params, undefined, page);
 
