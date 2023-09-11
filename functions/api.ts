@@ -1,6 +1,5 @@
-import express, { Router } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
-import axios from 'axios';
 import cors from 'cors';
 import serverless from 'serverless-http';
 import { router as charactersRouter } from '../routes/Characters';
@@ -21,6 +20,7 @@ export const publicKey = process.env.REACT_APP_PUBLIC_API_KEY;
 export const privateKey = process.env.REACT_APP_PRIVATE_API_KEY;
 export const hash = getHash(timestamp, privateKey, publicKey);
 export const tmdbToken = process.env.REACT_APP_BEARER_TOKEN;
+export const newsKey = process.env.REACT_APP_NEWS_KEY;
 
 const app = express();
 app.use(cors());

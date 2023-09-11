@@ -1,36 +1,31 @@
 import {  useEffect, useState } from "react";
 import useFetch from "../components/useFetch";
-import { INewsParams, NewsData, INews } from "../interfaces/INews";
+import { NewsData, INews } from "../interfaces/INews";
 import '../styles/News.css';
 
-const date = new Date();
-const lastWeek = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 6).toISOString().slice(0, 10);
-const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toISOString().slice(0, 10);
+interface IParams { page: number }
 
 const News = () => {
     const [news, setNews] = useState<NewsData[]>([]);
-    const [newsPageNumber, setNewsPageNumber] = useState(1);
+    const [page, setPage] = useState(1);
 
-    const newsParams: INewsParams = {
-        apikey: '80cb349609ca47068ca5a9fbf644a325',
-        sortBy: "relevancy",
-        from: lastWeek,
-        to: today,
-        language: "en",
-        pageSize: 2,
-        page: newsPageNumber
-    }
-
-    const { data: newsData, hasMore } = useFetch<INews[], INewsParams>("https://newsapi.org/v2/everything?q=mcu", [], newsParams, undefined, newsPageNumber);
+    const params = { page: page };
+    const url = '/.netlify/functions/api/news';
+    const { data: newsData, hasMore } = useFetch<INews[], IParams>(url, [], params, undefined, page);
 
     useEffect(() => {
         if (newsData.length > 0) {
-            setNews(newsData.map(group => group.articles.filter(article => 
-                (article.urlToImage !== null && article.title.match("Marvel")?.toString().toUpperCase()) || article.description.match("Marvel")?.toString().toUpperCase()
+            setNews(newsData.map(group => group.articles.filter(article => {
+                if (article.urlToImage !== null) {
+                    if (article.title.match("Marvel")?.toString().toUpperCase()) {
+                        return article;
+                    }
+                    else if (article.description.match("Marvel")?.toString().toUpperCase()) {
+                        return article;
+                    }
+                }
+            }
             )))
-        }
-        else {
-            setNewsPageNumber(prev => prev + 1);
         }
     }, [newsData])
 
@@ -52,7 +47,7 @@ const News = () => {
                     )
                 )
             }
-            { hasMore && <button className="show-more" onClick={() => setNewsPageNumber(prev => prev + 1)}>Show More</button> }
+            { hasMore && <button className="show-more" onClick={() => setPage(prev => prev + 1)}>Show More</button> }
         </section>
         :
         null
