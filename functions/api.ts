@@ -6,6 +6,7 @@ import serverless from 'serverless-http';
 import { router as charactersRouter } from '../routes/Characters';
 import { router as comicsRouter } from '../routes/Comics';
 import { router as moviesRouter } from '../routes/Movies';
+import { router as seriesRouter } from '../routes/Series';
 
 dotenv.config();
 
@@ -25,5 +26,6 @@ app.use(cors());
 app.use('/.netlify/functions/api/characters', charactersRouter);
 app.use('/.netlify/functions/api/comics', comicsRouter);
 app.use('/.netlify/functions/api/movies', moviesRouter);
+app.use('/.netlify/functions/api/series', seriesRouter);
 
 export const handler = serverless(app);

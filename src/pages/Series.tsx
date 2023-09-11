@@ -2,7 +2,6 @@ import { useEffect, useCallback, useState, useRef, SetStateAction, Dispatch } fr
 import { MovieData } from "../interfaces/IMovies";
 import useFetch from "../components/useFetch";
 import { Link } from "react-router-dom";
-import { tmdbHeaders } from "../interfaces/IMovies";
 
 type Series = {
     id: number
@@ -15,24 +14,15 @@ type Series = {
     name: string;
 }[]
 
-interface ParamsProps {
-    include_adult: boolean
-    language: string
-    with_companies: string
-    sort_by: string
-}
-
-const params: ParamsProps = {
-    include_adult: false,
-    language: 'en-US',
-    with_companies: '420|19551|38679|2301|13252',
-    sort_by: 'popularity.desc'
-}
+interface IParams { page: number }
 
 const Movies = ({ clicked, setClicked }: { clicked: string | number, setClicked: Dispatch<SetStateAction<string | number>> }) => {
     const [series, setSeries] = useState<Series[]>([]);
     const [page, setPage] = useState(1);
-    const { data: seriesData, hasMore, loading } = useFetch<MovieData[], ParamsProps>(`https://api.themoviedb.org/3/discover/tv?&page=${page}`, [], params, tmdbHeaders, page);
+
+    const params = { page: page };
+    const url = '/.netlify/functions/api/series';
+    const { data: seriesData, hasMore, loading } = useFetch<MovieData[], IParams>(url, [], params, undefined, page);
     const observer = useRef<IntersectionObserver>();
 
     useEffect(() => {

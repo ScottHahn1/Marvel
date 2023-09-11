@@ -1,16 +1,5 @@
 import { useEffect, useState } from "react";
-import { tmdbHeaders } from "../interfaces/IMovies";
 import useFetch from "../components/useFetch";
-
-interface ParamsProps {
-  external_source: string
-  language: string
-}
-
-const params: ParamsProps = {
-  external_source: 'imdb_id',
-  language: 'en-US',
-}
 
 type SeriesData = {
   tv_results: {
@@ -34,21 +23,13 @@ type Series = {
   name: string
 }
 
-type ExternalId = {
-  imdb_id: string
-}
+interface IParams { id: string | number };
 
 const SeriesInfo = ({ clicked }: { clicked: string | number }) => {
   const [series, setSeries] = useState<Series>({} as Series);
-  const [url, setUrl] = useState('');
-  const { data: externalId } = useFetch<ExternalId[], null>(`https://api.themoviedb.org/3/tv/${clicked}/external_ids`, [], null, tmdbHeaders);
-  const { data: seriesData, loading } = useFetch<SeriesData[], ParamsProps>(url, [], params, tmdbHeaders);
 
-  useEffect(() => {
-    if (externalId.length > 0) {
-      setUrl(`https://api.themoviedb.org/3/find/${externalId[0].imdb_id}`);
-    }
-  }, [externalId])
+  const params = { id: clicked };
+  const { data: seriesData, loading } = useFetch<SeriesData[], IParams>(`/.netlify/functions/api/series/series-info/:id`, [], params, undefined);
 
   useEffect(() => {
     seriesData.length > 0 && setSeries(seriesData[0].tv_results[0]);
