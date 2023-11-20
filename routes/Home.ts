@@ -18,11 +18,10 @@ router.get('/featured-movie', (req, res) => {
         },
         params: {
             include_adult: false,
-            year: new Date().getFullYear(),
+            year: 2024,
             language: 'en-US',
             with_companies: '420|19551|38679|2301|13252',
-            sort_by: 'primary_release_date.asc',
-            primary_release_year: 2023
+            sort_by: 'primary_release_date.desc',
         }
     })
     .then(response => {
