@@ -27,8 +27,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start:backend": "nodemon ./functions/api.ts",
-    "start:frontend": "react-scripts start",
+    "serve": "netlify dev",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
