@@ -8,6 +8,13 @@ import { router as moviesRouter } from '../routes/Movies';
 import { router as seriesRouter } from '../routes/Series';
 import { router as homeRouter } from '../routes/Home';
 
+const app = express();
+app.use(cors({
+  origin: ['https://marvel-world-heroes.netlify.app', 'http://localhost:3000'],
+  methods: 'GET, OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 dotenv.config();
 
 const getHash = (ts: string, privateKey: string | undefined, publicKey: string | undefined) => {
@@ -21,9 +28,6 @@ export const privateKey = process.env.REACT_APP_PRIVATE_API_KEY;
 export const hash = getHash(timestamp, privateKey, publicKey);
 export const tmdbToken = process.env.REACT_APP_BEARER_TOKEN;
 export const newsKey = process.env.REACT_APP_NEWS_KEY;
-
-const app = express();
-app.use(cors());
 
 app.use('/.netlify/functions/api/', homeRouter);
 app.use('/.netlify/functions/api/characters', charactersRouter);
