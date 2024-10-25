@@ -25,6 +25,27 @@ router.get('/', (req, res) => {
     .catch(err => console.error(err));
 });
 
+router.get('/featured-movie', (req, res) => {
+    axios.get(`https://api.themoviedb.org/3/discover/movie?&page=1`, {
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
+        },
+        params: {
+            include_adult: false,
+            year: 2025,
+            language: 'en-US',
+            with_companies: '420|19551|38679|2301|13252',
+            sort_by: 'primary_release_date.desc'
+        }
+    })
+    .then(response => {
+        res.json(response.data);
+    })
+    .catch(err => console.error(err));
+});
+
 router.get('/movie-info/:id', (req, res) => {
     const id = req.query.id;
 
