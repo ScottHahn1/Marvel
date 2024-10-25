@@ -5,9 +5,11 @@
 
 [dev]
   functions = "netlify/functions"       
-  publish = "build"                     
+  publish = "build"
+  port = 8888                      
+  targetPort = 3000                 
 
-# Redirects (optional)
+# Redirects
 [[redirects]]
   from = "/api/*"                      
   to = "/.netlify/functions/:splat"   
