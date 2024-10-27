@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.14",
+    "@types/md5": "^2.3.5",
     "@types/react-router-dom": "^5.3.3",
     "dotenv": "^16.3.1",
     "gh-pages": "^6.0.0",
