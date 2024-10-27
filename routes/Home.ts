@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { hash, publicKey, timestamp, newsKey } from '../functions/api';
+import { hash, publicKey, timestamp, newsKey } from '../netlify/functions/api';
 import { Router } from 'express';
 
 const router = Router();
@@ -31,13 +31,7 @@ const today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).toIS
 const twoMonthsFromNow = new Date(date.getFullYear(), date.getMonth() + 2, date.getDate()).toISOString().slice(0, 10);
 
 router.get('/new-comics', (req, res) => {
-    axios.get(`https://gateway.marvel.com/v1/public/comics?&limit=100&orderBy=onsaleDate&dateRange=${today},${twoMonthsFromNow}`, {
-        params: {
-            apikey: publicKey,
-            ts: timestamp,
-            hash: hash,
-        }
-    })
+    axios.get(`https://gateway.marvel.com/v1/public/comics?limit=100&orderBy=onsaleDate&dateRange=${today},${twoMonthsFromNow}&ts=${timestamp}&apikey=${publicKey}&hash=${hash}`)
     .then(response => {
         res.json(response.data);
     })

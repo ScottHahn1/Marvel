@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { hash, publicKey, timestamp } from '../functions/api';
+import { hash, publicKey, timestamp } from '../netlify/functions/api';
 import { Router } from 'express';
 
 const router = Router();
